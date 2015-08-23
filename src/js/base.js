@@ -47,7 +47,7 @@ $(function() {
 
   id_cache = {};
 
-  var u = url.replace("$$$", x2);
+  var u = url.replace("$$$", x);
   $.getJSON(u).done(function(d) {
     updatePosts(d.data.children);
   });  
