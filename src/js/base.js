@@ -30,6 +30,7 @@ $(function() {
     });
     var r = Mustache.render(videoTemplate, {urls: urls});
     $(".Video").append(r);
+    $(".Video video").get(0).play();
   });
   
   
