@@ -5,7 +5,10 @@ var x2 = "deepthroat+Throatfucking+gag_spit+DeepThroatTears";
 
 
 
-var gfycatBases = ["http://giant.gfycat.com/$$$.mp4", "http://fat.gfycat.com/$$$.mp4", "http://zippy.gfycat.com/$$$.mp4"];
+var gfycatBases = [
+  "http://giant.gfycat.com/$$$.mp4", "http://fat.gfycat.com/$$$.mp4", "http://zippy.gfycat.com/$$$.mp4",
+  "http://giant.gfycat.com/$$$.webm", "http://fat.gfycat.com/$$$.webm", "http://zippy.gfycat.com/$$$.webm",
+];
 
 function extractGfycatId(u) {
   return u.match(/\/([^\/]+)$/)[1];
