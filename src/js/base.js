@@ -3,7 +3,9 @@ var url = "https://www.reddit.com/r/$$$/search.json?q=site%3Agfycat.com&sort=new
 var x = "cumsluts+cumfetish+cumcoveredfucking+amateurcumsluts+before_after_cumsluts+throatpies+cumonclothes+CumSwap+OhCumOn+CumAgain+cumplay_gifs+RedditorCum+CumOnGlasses+IsThatCUM+teensexcum+FakeCum+girlslickingcum+prematurecumshots+World_of_cum+ManMilk";
 var x2 = "deepthroat+Throatfucking+gag_spit+DeepThroatTears";
 
-var gfycatBases = ["http://giant.gfycat.com/$$$.mp4", "http://fat.gfycat.com/$$$.mp4"];
+
+
+var gfycatBases = ["http://giant.gfycat.com/$$$.mp4", "http://fat.gfycat.com/$$$.mp4", "http://zippy.gfycat.com/$$$.mp4"];
 
 function extractGfycatId(u) {
   return u.match(/\/([^\/]+)$/)[1];
