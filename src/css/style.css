@@ -6,3 +6,19 @@
 	max-height: 100vh;
 }
 
+.Container {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.Post {
+	display: flex;
+	height: 100px;
+
+	padding-bottom: 10px;
+}
+
+.Post-image {
+	height: 100%;
+}
