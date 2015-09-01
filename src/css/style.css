@@ -19,6 +19,10 @@
 	padding-bottom: 10px;
 }
 
+.Post-image-container {
+	width: 130px;
+}
+
 .Post-image {
 	height: 100%;
 	margin-right: 10px;
