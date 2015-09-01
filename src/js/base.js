@@ -1,39 +1,44 @@
-var url = "https://www.reddit.com/r/$$$/search.json?q=site%3Agfycat.com&sort=new&restrict_sr=on&t=all&limit=100&jsonp=?";
+/*global $,Mustache,document,console*/
+var redditBaseUrl = "https://www.reddit.com/r/$$$/search.json?q=site%3Agfycat.com&sort=new&restrict_sr=on&t=all&limit=100&jsonp=?";
 
-var x = "cumsluts+cumfetish+cumcoveredfucking+amateurcumsluts+before_after_cumsluts+throatpies+cumonclothes+CumSwap+OhCumOn+CumAgain+cumplay_gifs+RedditorCum+CumOnGlasses+IsThatCUM+teensexcum+FakeCum+girlslickingcum+prematurecumshots+World_of_cum+ManMilk";
-var x2 = "deepthroat+Throatfucking+gag_spit+DeepThroatTears";
-
-
+var subreddits = "cumsluts+cumfetish+cumcoveredfucking+amateurcumsluts+before_after_cumsluts+throatpies+cumonclothes+CumSwap+OhCumOn+CumAgain+cumplay_gifs+RedditorCum+CumOnGlasses+IsThatCUM+teensexcum+FakeCum+girlslickingcum+prematurecumshots+World_of_cum+ManMilk+TrueBukkake+CumFetish";
+var subreddits = "deepthroat+Throatfucking+gag_spit+DeepThroatTears";
 
 var gfycatBases = [
   "http://giant.gfycat.com/$$$.mp4", "http://fat.gfycat.com/$$$.mp4", "http://zippy.gfycat.com/$$$.mp4",
-  "http://giant.gfycat.com/$$$.webm", "http://fat.gfycat.com/$$$.webm", "http://zippy.gfycat.com/$$$.webm",
+  "http://giant.gfycat.com/$$$.webm", "http://fat.gfycat.com/$$$.webm", "http://zippy.gfycat.com/$$$.webm"
 ];
 
 function extractGfycatId(u) {
   return u.match(/\/([^\/]+)$/)[1];
 }
 
-$(function() {
-  var postTemplate = $("#post").html();
-  Mustache.parse(postTemplate);
+function gfycatUrls(gfycatid) {
+  return gfycatBases.map(function(base) {
+    var url = base.replace("$$$", gfycatid);
+    return {url: url};
+  });
+}
 
-  var videoTemplate = $("#video").html();
+$(function() {
+  var postTemplate = $("#template_post").html();
+  Mustache.parse(postTemplate);
+  var videoTemplate = $("#template_video").html();
   Mustache.parse(videoTemplate);
 
   $(document).on("click", "[data-gfycatid]", function() {
     $(".Video").empty();
     var e = $(this);
-    var urls = gfycatBases.map(function(base) {
-      var url = base.replace("$$$", e.data("gfycatid"));
-      return {url: url};
-    });
+    var urls = gfycatUrls(e.data("gfycatid"));
     var r = Mustache.render(videoTemplate, {urls: urls});
     $(".Video").append(r);
     $(".Video video").get(0).play();
   });
   
-  
+  $(document).on("click", "#video", function() {
+    $(".Video").empty();
+  });
+
   function updatePosts(posts) {
     $(".Container").empty();
     var fragment = $(document.createDocumentFragment());
@@ -45,10 +50,10 @@ $(function() {
     $(".Container").append(fragment);
   }
 
-  id_cache = {};
+  // var id_cache = {};
 
-  var u = url.replace("$$$", x);
-  $.getJSON(u).done(function(d) {
+  var redditUrl = redditBaseUrl.replace("$$$", subreddits);
+  $.getJSON(redditUrl).done(function(d) {
     updatePosts(d.data.children);
   });  
 });
