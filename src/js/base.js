@@ -1,8 +1,37 @@
 /*global $,Mustache,document,console*/
 var redditBaseUrl = "https://www.reddit.com/r/$$$/search.json?q=site%3Agfycat.com&sort=new&restrict_sr=on&t=all&limit=100&jsonp=?";
 
-var subreddits = "cumsluts+cumfetish+cumcoveredfucking+amateurcumsluts+before_after_cumsluts+throatpies+cumonclothes+CumSwap+OhCumOn+CumAgain+cumplay_gifs+RedditorCum+CumOnGlasses+IsThatCUM+teensexcum+FakeCum+girlslickingcum+prematurecumshots+World_of_cum+ManMilk+TrueBukkake+CumFetish";
-var subreddits = "deepthroat+Throatfucking+gag_spit+DeepThroatTears";
+var subreddits = [
+  "deepthroat",
+  "Throatfucking",
+  "gag_spit",
+  "DeepThroatTears"
+];
+
+subreddits = [
+  "cumsluts",
+  "cumfetish",
+  "cumcoveredfucking",
+  "amateurcumsluts",
+  "before_after_cumsluts",
+  "throatpies",
+  "cumonclothes",
+  "CumSwap",
+  "OhCumOn",
+  "CumAgain",
+  "cumplay_gifs",
+  "RedditorCum",
+  "CumOnGlasses",
+  "IsThatCUM",
+  "teensexcum",
+  "FakeCum",
+  "girlslickingcum",
+  "prematurecumshots",
+  "World_of_cum",
+  "ManMilk",
+  "TrueBukkake",
+  "CumFetish"
+];
 
 var gfycatBases = [
   "http://giant.gfycat.com/$$$.mp4", "http://fat.gfycat.com/$$$.mp4", "http://zippy.gfycat.com/$$$.mp4",
@@ -16,7 +45,9 @@ function extractGfycatId(u) {
 function gfycatUrls(gfycatid) {
   return gfycatBases.map(function(base) {
     var url = base.replace("$$$", gfycatid);
-    return {url: url};
+    return {
+      url: url
+    };
   });
 }
 
@@ -30,11 +61,13 @@ $(function() {
     $(".Video").empty();
     var e = $(this);
     var urls = gfycatUrls(e.data("gfycatid"));
-    var r = Mustache.render(videoTemplate, {urls: urls});
+    var r = Mustache.render(videoTemplate, {
+      urls: urls
+    });
     $(".Video").append(r);
     $(".Video video").get(0).play();
   });
-  
+
   $(document).on("click", "#video", function() {
     $(".Video").empty();
   });
@@ -52,8 +85,10 @@ $(function() {
 
   // var id_cache = {};
 
-  var redditUrl = redditBaseUrl.replace("$$$", subreddits);
+  console.log(subreddits);
+  var redditUrl = redditBaseUrl.replace("$$$", subreddits.join("+"));
   $.getJSON(redditUrl).done(function(d) {
+    console.log(d);
     updatePosts(d.data.children);
-  });  
+  });
 });
