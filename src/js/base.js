@@ -1,37 +1,5 @@
-/*global $,Mustache,document,console*/
+/*global $,Mustache,document,console,subreddit_lists*/
 var redditBaseUrl = "https://www.reddit.com/r/$$$/search.json?q=site%3Agfycat.com&sort=new&restrict_sr=on&t=all&limit=100&jsonp=?";
-
-var subreddits = [
-  "deepthroat",
-  "Throatfucking",
-  "gag_spit",
-  "DeepThroatTears"
-];
-
-subreddits = [
-  "cumsluts",
-  "cumfetish",
-  "cumcoveredfucking",
-  "amateurcumsluts",
-  "before_after_cumsluts",
-  "throatpies",
-  "cumonclothes",
-  "CumSwap",
-  "OhCumOn",
-  "CumAgain",
-  "cumplay_gifs",
-  "RedditorCum",
-  "CumOnGlasses",
-  "IsThatCUM",
-  "teensexcum",
-  "FakeCum",
-  "girlslickingcum",
-  "prematurecumshots",
-  "World_of_cum",
-  "ManMilk",
-  "TrueBukkake",
-  "CumFetish"
-];
 
 var gfycatBases = [
   "http://giant.gfycat.com/$$$.mp4", "http://fat.gfycat.com/$$$.mp4", "http://zippy.gfycat.com/$$$.mp4",
@@ -56,21 +24,20 @@ $(function() {
   Mustache.parse(postTemplate);
   var videoTemplate = $("#template_video").html();
   Mustache.parse(videoTemplate);
+  var subredditLinkTemplate = $("#template_subreddit_link").html();
+  Mustache.parse(subredditLinkTemplate);
 
-  $(document).on("click", "[data-gfycatid]", function() {
-    $(".Video").empty();
-    var e = $(this);
-    var urls = gfycatUrls(e.data("gfycatid"));
+  var videoContainer = $(".Video");
+
+  function playVideo(gfycatid) {
+    videoContainer.empty();
+    var urls = gfycatUrls(gfycatid);
     var r = Mustache.render(videoTemplate, {
       urls: urls
     });
-    $(".Video").append(r);
-    $(".Video video").get(0).play();
-  });
-
-  $(document).on("click", "#video", function() {
-    $(".Video").empty();
-  });
+    videoContainer.append(r);
+    videoContainer.find("video").get(0).play();
+  }
 
   function updatePosts(posts) {
     $(".Container").empty();
@@ -82,13 +49,45 @@ $(function() {
     });
     $(".Container").append(fragment);
   }
+  
+  function fetch(subreddits) {
+    $(".Container").empty();
+    var redditUrl = redditBaseUrl.replace("$$$", subreddits.join("+"));
+    $.getJSON(redditUrl).done(function(d) {
+      console.log(d);
+      updatePosts(d.data.children);
+    });
+  }
+  
+  function fetchListIndex(index) {
+    var subreddit_list = subreddit_lists.lists[index];
+    fetch(subreddit_list.names);
+  }
+  
+  function buildSubredditLinks() {
+    var container = $(".Header");
+    subreddit_lists.lists.forEach(function(l, i) {
+      var r = Mustache.render(subredditLinkTemplate, {title: l.title, index: i});
+      container.append(r);
+    });
+  }
+  
+  buildSubredditLinks();
 
-  // var id_cache = {};
-
-  console.log(subreddits);
-  var redditUrl = redditBaseUrl.replace("$$$", subreddits.join("+"));
-  $.getJSON(redditUrl).done(function(d) {
-    console.log(d);
-    updatePosts(d.data.children);
+  $(document).on("click", "[data-gfycatid]", function() {
+    var e = $(this);
+    playVideo(e.data("gfycatid"));
   });
+
+  $(document).on("click", "[data-subreddit_list_index]", function() {
+    var e = $(this);
+    fetchListIndex(e.data("subreddit_list_index"));
+  });
+
+  $(document).on("click", "#video", function() {
+    $(".Video").empty();
+  });
+
+  console.log(subreddit_lists);
+  fetchListIndex(0);
 });

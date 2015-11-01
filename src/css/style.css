@@ -32,3 +32,13 @@
 	max-height: 100%;
 	max-width: 100%;
 }
+
+.Header {
+  display: flex;
+  
+}
+
+.SubredditLink {
+  padding: 20px;
+  border: 1px solid black;
+}
