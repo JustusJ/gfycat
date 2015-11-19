@@ -33,5 +33,32 @@ var subreddit_lists = {
       "DeepThroatTears"
     ],
     "title": "THROAT"
+  }, {
+    "names": [
+      "anal",
+      "NSFW_HTML5",
+      "60fpsporn",
+      "anal_gifs",
+      "Blowjobs",
+      "BustyPetite",
+      "curvesarebeautiful",
+      "Find_My_Porn",
+      "gettingherselfoff",
+      "GirlswithGlasses",
+      "HighResNSFW",
+      "Hotchickswithtattoos",
+      "Lesnaa",
+      "nsfw",
+      "NSFWCostumes",
+      "NSFW_GIF",
+      "nsfw_gifs",
+      "Oilporn",
+      "quicky",
+      "Sexmachines",
+      "Sexy_Ed",
+      "suctiondildos",
+      "UncutPorn"
+    ],
+    "title": "MISC"
   }]
 };
