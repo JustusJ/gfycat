@@ -1,5 +1,5 @@
 /*global $,Mustache,document,console,subreddit_lists*/
-var redditBaseUrl = "https://www.reddit.com/r/$$$/search.json?q=site%3Agfycat.com&sort=new&restrict_sr=on&t=all&limit=100&jsonp=?";
+var redditBaseUrl = "https://www.reddit.com/r/$$$/search.json?q=site%3Agfycat.com&sort=new&restrict_sr=on&t=all&limit=100";
 
 var gfycatBases = [
   "http://giant.gfycat.com/$$$.mp4", "http://fat.gfycat.com/$$$.mp4", "http://zippy.gfycat.com/$$$.mp4",
@@ -54,7 +54,6 @@ $(function() {
     $(".Container").empty();
     var redditUrl = redditBaseUrl.replace("$$$", subreddits.join("+"));
     $.getJSON(redditUrl).done(function(d) {
-      console.log(d);
       updatePosts(d.data.children);
     });
   }
