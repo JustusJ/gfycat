@@ -56,11 +56,7 @@ var subreddit_lists = {
       "Sexmachines",
       "Sexy_Ed",
       "suctiondildos",
-      "happydeepthroat"
-    ],
-    "title": "MISC"
-  }, {
-    "names": [
+      "happydeepthroat",
       "anal",
       "NSFW_HTML5",
       "60fpsporn",
