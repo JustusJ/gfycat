@@ -90,3 +90,9 @@ $(function() {
   console.log(subreddit_lists);
   fetchListIndex(0);
 });
+
+
+//$.ajax({
+//  url: "https://api.imgur.com/3/album/vYDuA",
+//    headers:{ "Authorization": "Client-ID d7cd893ec8420c7"}
+//}).done(function() {console.log(arguments)})
