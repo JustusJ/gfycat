@@ -13,6 +13,8 @@ html
 	
 	body
 		.Header
+			.Header-links
+			.Header-loading loading
 		- templates.each do |id, template|
 			script id="template_#{id}" type="x-tmpl-mustache"
 				== template

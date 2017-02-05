@@ -53,8 +53,10 @@ $(function() {
   
   function fetch(subreddits) {
     $(".Container").empty();
+    $("body").addClass("loading");
     var redditUrl = redditBaseUrl.replace("$$$", subreddits.join("+"));
     $.getJSON(redditUrl).done(function(d) {
+      $("body").removeClass("loading");
       updatePosts(d.data.children);
     });
   }
@@ -65,7 +67,7 @@ $(function() {
   }
   
   function buildSubredditLinks() {
-    var container = $(".Header");
+    var container = $(".Header-links");
     subreddit_lists.lists.forEach(function(l, i) {
       var r = Mustache.render(subredditLinkTemplate, {title: l.title, index: i});
       container.append(r);
