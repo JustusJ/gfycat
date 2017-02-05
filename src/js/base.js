@@ -7,7 +7,8 @@ var gfycatBases = [
 ];
 
 function extractGfycatId(u) {
-  return u.match(/\/([^\/]+)$/)[1];
+  var m = u.replace(/https?:\/\//, "").match(/\/([a-z]+)/i);
+  return m[1];
 }
 
 function gfycatUrls(gfycatid) {
